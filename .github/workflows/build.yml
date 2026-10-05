@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.23.2'
+      - name: Test
+        run: go test ./...
+      - name: Vet
+        run: go vet ./...
+
+  windows:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.23.2'
+      - name: Build Windows x64
+        run: GOOS=windows GOARCH=amd64 go build -trimpath -ldflags="-H=windowsgui -s -w" -o NEXUS_BO3_Workshop_Grabber.exe .
+      - name: SHA-256
+        run: sha256sum NEXUS_BO3_Workshop_Grabber.exe
+      - uses: actions/upload-artifact@v4
+        with:
+          name: NEXUS_BO3_Workshop_Grabber-windows-x64
+          path: NEXUS_BO3_Workshop_Grabber.exe
