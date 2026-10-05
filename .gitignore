@@ -1,0 +1,5 @@
+NEXUS_BO3_Workshop_Grabber.exe
+*.exe
+*.zip
+*.log
+.DS_Store
