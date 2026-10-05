@@ -87,7 +87,7 @@ Build the Windows x64 GUI executable:
 GOOS=windows GOARCH=amd64 go build -trimpath -ldflags="-H=windowsgui -s -w" -o NEXUS_BO3_Workshop_Grabber.exe .
 ```
 
-The checked-in v0.2 source reproduces the hardware-tested executable with SHA-256:
+The hardware-tested v0.2 dark executable distributed with this release has SHA-256:
 
 ```text
 ff8a6552cb4c94197ca01abcf3ee6c7bce36bd1bf7419abb0dd2169182f7c5e9
